@@ -1,0 +1,21 @@
+.chartPage{
+    background-color: linen;
+    margin-left: auto;
+    width: 85%;
+    margin-left: auto;
+    position:relative;
+    margin-top: 0px;
+    z-index: 999;
+}
+.chartWrapper{
+    margin-top: 0px;
+}
+.headlineOfTable{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    font-size: 30px;
+    margin-top: 0px;
+
+}
+

@@ -1,0 +1,72 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/is-prop-valid": "^1.2.1",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "arima": "^0.2.5",
+    "axios": "^1.4.0",
+    "chart.js": "^4.3.0",
+    "cors": "^2.8.5",
+    "highcharts-react-official": "^3.2.0",
+    "http-proxy-middleware": "^2.0.6",
+    "matplotlib": "^1.0.0",
+    "ml-matrix": "^6.10.4",
+    "ml-regression": "^5.0.0",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
+    "node-fetch": "^3.3.1",
+    "normalize.css": "^8.0.1",
+    "numpy": "^0.0.1",
+    "pandas": "^0.0.3",
+    "pandas-js": "^0.2.4",
+    "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1",
+    "react-jsx-highcharts": "^5.0.1",
+    "react-router-dom": "^6.4.4",
+    "react-scripts": "5.0.1",
+    "react-table": "^7.8.0",
+    "recharts": "^2.6.2",
+    "scipy": "^0.1.4",
+    "socket.io-client": "^4.6.1",
+    "stats": "^1.0.0",
+    "statsmodels-js": "^0.4.2",
+    "styled-components": "^5.3.6",
+    "web-vitals": "^2.1.4",
+    "websocket": "^1.0.34"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:5000"
+}
