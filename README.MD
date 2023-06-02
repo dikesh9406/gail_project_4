@@ -8,7 +8,6 @@ https://medium.com/geekculture/deploying-a-react-app-and-a-node-js-server-on-a-s
 Project in Action - [Jobify](https://www.jobify.live/)
 
 #### Support
-
 Find the App Useful? [You can always buy me a coffee](https://www.buymeacoffee.com/johnsmilga)
 
 #### Run The App Locally
