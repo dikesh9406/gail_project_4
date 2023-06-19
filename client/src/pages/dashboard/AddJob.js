@@ -62,7 +62,7 @@ const AddJob = () => {
 
   const createJob = async (formData) => {
     try {
-      const response = await axios.post('/api/v1/motor', formData);
+      const response = await axios.post('http://localhost:3000/api/v1/motor', formData);
       console.log('Job created:', response.data);
       // Optionally, you can perform additional actions after a successful create request
     } catch (error) {

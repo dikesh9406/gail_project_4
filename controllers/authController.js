@@ -3,16 +3,16 @@ import { StatusCodes } from 'http-status-codes';
 import { BadRequestError, UnAuthenticatedError } from '../errors/index.js';
 import attachCookie from '../utils/attachCookie.js';
 const register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, userType } = req.body;
 
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !userType) {
     throw new BadRequestError('please provide all values');
   }
   const userAlreadyExists = await User.findOne({ email });
   if (userAlreadyExists) {
     throw new BadRequestError('Email already in use');
   }
-  const user = await User.create({ name, email, password });
+  const user = await User.create({ name, email, password, userType });
 
   const token = user.createJWT();
   attachCookie({ res, token });
@@ -22,14 +22,15 @@ const register = async (req, res) => {
       lastName: user.lastName,
       location: user.location,
       name: user.name,
+      userType: user.userType,
     },
 
     location: user.location,
   });
 };
 const login = async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
+  const { email, password, userType } = req.body;
+  if (!email || !password ||!userType) {
     throw new BadRequestError('Please provide all values');
   }
   const user = await User.findOne({ email }).select('+password');
@@ -48,7 +49,7 @@ const login = async (req, res) => {
   res.status(StatusCodes.OK).json({ user, location: user.location });
 };
 const updateUser = async (req, res) => {
-  const { email, name, lastName, location } = req.body;
+  const { email, name, lastName, location, userType } = req.body;
   if (!email || !name || !lastName || !location) {
     throw new BadRequestError('Please provide all values');
   }
@@ -58,6 +59,7 @@ const updateUser = async (req, res) => {
   user.name = name;
   user.lastName = lastName;
   user.location = location;
+  user.userType= userType;
 
   await user.save();
 

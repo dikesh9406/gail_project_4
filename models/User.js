@@ -37,6 +37,12 @@ const UserSchema = new mongoose.Schema({
     maxlength: 20,
     default: 'my city',
   },
+  userType: {
+    type: String,
+    trim: true,
+    default: 'User',
+    
+  },
 })
 
 UserSchema.pre('save', async function () {

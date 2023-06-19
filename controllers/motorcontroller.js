@@ -41,14 +41,15 @@ const addmotor  = async (req,res)=>{
     }
 }
 
-const showmotor = async(req,res)=>{
+const showmotor = async (req, res) => {
     try {
-        const data = await Motor.find().sort({_id:-1}).limit(5);
-        res.status(200).json(data);
+      const data = await Motor.find().sort({ _id: -1 });
+      res.status(200).json(data);
     } catch (error) {
-        res.status(404).json({msg : "Server Side issue data nor send Successfully"})
+      res.status(404).json({ msg: "Server Side issue data not sent successfully" });
     }
-};
+  };
+  
 
 const realTimeData = async (req,res)=>{
     

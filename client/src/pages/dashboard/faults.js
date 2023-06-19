@@ -29,18 +29,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const TableContainer = styled(Paper)(({ theme }) => ({
+  maxHeight: 300,
+  overflowY: "scroll",
+}));
+
 function createData(_id, motorStatus, motorType, createdAt) {
   return { _id, motorStatus, motorType, createdAt };
 }
 
-const rows = [
-  createData("123", "-", "-"),
-];
-
 export default function Faults({ data }) {
   return (
     <React.Fragment>
-      <Paper sx={{ m: 2 }}>
+     
         <Typography
           component="h1"
           variant="h5"
@@ -49,7 +50,9 @@ export default function Faults({ data }) {
         >
           Motors
         </Typography>
+        <TableContainer sx={{ m: 2 }}>
         <Table aria-label="customized table">
+       
           <TableHead>
             <TableRow>
               <StyledTableCell>Motor ID</StyledTableCell>
@@ -59,8 +62,8 @@ export default function Faults({ data }) {
               <StyledTableCell align="right">HealthCard</StyledTableCell>
             </TableRow>
           </TableHead>
-          <TableBody >
-            {data.map((row, index) => (
+          <TableBody>
+            {[...data].map((row, index) => (
               <StyledTableRow key={index}>
                 <StyledTableCell component="th" scope="row">
                   {row._id}
@@ -80,8 +83,10 @@ export default function Faults({ data }) {
               </StyledTableRow>
             ))}
           </TableBody>
+          
         </Table>
-      </Paper>
+        </TableContainer>
+      
     </React.Fragment>
   );
 }

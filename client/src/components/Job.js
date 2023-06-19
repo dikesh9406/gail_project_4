@@ -7,12 +7,12 @@ import JobInfo from './JobInfo'
 
 const Job = ({
   _id,
-  position,
-  company,
-  jobLocation,
-  jobType,
+  motorName,
+  motorBrand,
+  motorLocation,
+  motorStatus,
   createdAt,
-  status,
+  motorType,
 }) => {
   const { setEditJob, deleteJob } = useAppContext()
 
@@ -21,18 +21,18 @@ const Job = ({
   return (
     <Wrapper>
       <header>
-        <div className='main-icon'>{company.charAt(0)}</div>
+        <div className='main-icon'>{motorBrand.charAt(0)}</div>
         <div className='info'>
-          <h5>{position}</h5>
-          <p>{company}</p>
+          <h5>{motorName}</h5>
+          <p>{motorBrand}</p>
         </div>
       </header>
       <div className='content'>
         <div className='content-center'>
-          <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
+          <JobInfo icon={<FaLocationArrow />} text={motorLocation} />
           <JobInfo icon={<FaCalendarAlt />} text={date} />
-          <JobInfo icon={<FaBriefcase />} text={jobType} />
-          <div className={`status ${status}`}>{status}</div>
+          <JobInfo icon={<FaBriefcase />} text={motorStatus} />
+          <div className={`motorType ${motorType}`}>{motorType}</div>
         </div>
         <footer>
           <div className='actions'>
