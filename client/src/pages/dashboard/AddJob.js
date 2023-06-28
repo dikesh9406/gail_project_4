@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FormRow, FormRowSelect, Alert } from '../../components';
 import { useAppContext } from '../../context/appContext';
@@ -20,6 +20,18 @@ const AddJob = () => {
     handleChange,
     clearValues,
   } = useAppContext();
+  const [userType, setUserType] = useState('');
+
+  useEffect(() => {
+    fetch('/api/v1/auth/getCurrentUser')
+      .then(response => response.json())
+      .then(data => {
+        setUserType(data.user.userType);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,12 +57,10 @@ const AddJob = () => {
       }
 
       console.log('Form data sent successfully');
-      createJob();
       // Optionally, you can display a success message or redirect to another page
     } catch (error) {
       console.error('Error sending form data:', error);
       // displayAlert();
-      createJob();
     }
   };
 
@@ -73,7 +83,7 @@ const AddJob = () => {
 
   const editJob = async (formData) => {
     try {
-      const response = await axios.put(`/api/v1/motor`, formData);
+      const response = await axios.put('/api/v1/motor', formData);
       console.log('Job edited:', response.data);
       // Optionally, you can perform additional actions after a successful edit request
     } catch (error) {
@@ -82,76 +92,81 @@ const AddJob = () => {
     }
   };
 
-  return (
-    <Wrapper>
-      <form className='form'>
-        <h3>{isEditing ? 'edit Motor' : 'add Motor'}</h3>
-        {showAlert && <Alert />}
-        <div className='form-center'>
-          {/* motorName */}
-          <FormRow
-            type='text'
-            labelText='Motor Name'
-            name='motorName'
-            value={motorName}
-            handleChange={handleJobInput}
-          />
-          {/* motorBrand */}
-          <FormRow
-            type='text'
-            labelText='Motor Brand'
-            name='motorBrand'
-            value={motorBrand}
-            handleChange={handleJobInput}
-          />
-          {/* location */}
-          <FormRow
-            type='text'
-            labelText='Motor Location'
-            name='motorLocation'
-            value={motorLocation}
-            handleChange={handleJobInput}
-          />
-          {/* Motor status */}
-          <FormRowSelect
-            name='motorStatus'
-            labelText='Motor Status'
-            value={motorStatus}
-            handleChange={handleJobInput}
-            list={statusOptions}
-          />
-          {/* job type */}
-          <FormRowSelect
-            name='motorType'
-            labelText='Motor Type'
-            value={motorType}
-            handleChange={handleJobInput}
-            list={jobTypeOptions}
-          />
-          {/* btn container */}
-          <div className='btn-container'>
-            <button
-              type='submit'
-              className='btn btn-block submit-btn'
-              onClick={handleSubmit}
-              disabled={isLoading}
-            >
-              submit
-            </button>
-            <button
-              className='btn btn-block clear-btn'
-              onClick={(e) => {
-                e.preventDefault();
-                clearValues();
-              }}
-            >
-              clear
-            </button>
+  if (userType === 'Admin') {
+    return (
+      <Wrapper>
+        <form className='form'>
+          <h3>{isEditing ? 'Edit Motor' : 'Add Motor'}</h3>
+          {showAlert && <Alert />}
+          <div className='form-center'>
+            {/* motorName */}
+            <FormRow
+              type='text'
+              labelText='Motor Name'
+              name='motorName'
+              value={motorName}
+              handleChange={handleJobInput}
+            />
+            {/* motorBrand */}
+            <FormRow
+              type='text'
+              labelText='Motor Brand'
+              name='motorBrand'
+              value={motorBrand}
+              handleChange={handleJobInput}
+            />
+            {/* location */}
+            <FormRow
+              type='text'
+              labelText='Motor Location'
+              name='motorLocation'
+              value={motorLocation}
+              handleChange={handleJobInput}
+            />
+            {/* Motor status */}
+            <FormRowSelect
+              name='motorStatus'
+              labelText='Motor Status'
+              value={motorStatus}
+              handleChange={handleJobInput}
+              list={statusOptions}
+            />
+            {/* job type */}
+            <FormRowSelect
+              name='motorType'
+              labelText='Motor Type'
+              value={motorType}
+              handleChange={handleJobInput}
+              list={jobTypeOptions}
+            />
+            {/* btn container */}
+            <div className='btn-container'>
+              <button
+                type='submit'
+                className='btn btn-block submit-btn'
+                onClick={handleSubmit}
+                disabled={isLoading}
+              >
+                Submit
+              </button>
+              <button
+                className='btn btn-block clear-btn'
+                onClick={(e) => {
+                  e.preventDefault();
+                  clearValues();
+                }}
+              >
+                Clear
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
-    </Wrapper>
-  );
+        </form>
+      </Wrapper>
+    );
+  } else {
+    console.log('Only admin can access this page');
+    return (<h1>Only admin can access this page</h1>)
+  }
 };
 
 export default AddJob;
